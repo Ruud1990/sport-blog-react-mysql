@@ -28,8 +28,24 @@ db.query(q, [req.body.email, req.body.username], (err, data) => {
     })
  })
 }
-export const login = (req, res) => {
 
+
+
+
+export const login = (req, res) => {
+// check user
+
+const q = "SELECT * FROM users WHERE username = ?";
+
+db.query(q, [req, body, username], (err, data) => {
+    if(err) return res.json(err);
+    if (data.length === 0) return res.status(404).json('User not found!');
+
+    // check password
+    const passwordIsCorrect = bcrypt.compareSync(req.body.password, data[0].password);
+
+    if(!passwordIsCorrect) return res.status(404).json('Password or User is wrong!');
+})
 }
 export const logout = (req, res) => {
 
