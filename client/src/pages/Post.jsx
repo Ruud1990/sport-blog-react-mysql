@@ -6,6 +6,7 @@ import Menu from '../components/Menu';
 import axios from 'axios';
 import moment from 'moment';
 import { AuthContext } from '../context/authContext';
+import DOMPurify from "dompurify";
 
 const Post = () => {
   const [post, setPost] = useState({});
@@ -38,10 +39,15 @@ const Post = () => {
       }
     };
 
+    const getText = (html) =>{
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    return doc.body.textContent
+  }
+
   return (
     <div className='singlePost'>
       <div className='content'>
-        <img src={post?.img} alt=''></img>
+        <img src={`../upload/${post?.img}`} alt=''></img>
         <div className='user'>
           {post.userImg && <img src={post.userImg} alt=''></img>}
           <div className='info'>
@@ -49,14 +55,18 @@ const Post = () => {
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
           {currentUser.username === post.username && (<div className='edit'>
-            <Link to={`/write/edit=2`}>
+              <Link to={`/write?edit=2`} state={post}>
               <img src={Edit} alt='edit icon'></img>
             </Link>
               <img onClick={handleDelete} src={Delete} alt='delete icon'></img>
           </div>)}
         </div>
         <h1>{post.title}</h1>
-        {post.desc}
+        <p
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(post.desc),
+          }}
+        ></p> 
       </div>
       <Menu cat={post.cat}/>
     </div>

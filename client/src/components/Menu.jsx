@@ -15,38 +15,12 @@ const Menu = ({cat}) => {
     };
     fetchData();
   }, [cat]);
-  //   const posts = [
-  //   {
-  //     id: 1,
-  //     title: 'lorem ipsum',
-  //     desc: 'lorem ipsum',
-  //     img: 'https://media.istockphoto.com/id/608516034/pl/zdj%C4%99cie/koncepcja-fitness-i-treningu-wellness.jpg?s=2048x2048&w=is&k=20&c=PkgLkngAYhfNTP6OpFG4tYSbsq8ne7zAJ6Bh4ECVDNg='
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'lorem ipsum',
-  //     desc: 'lorem ipsum',
-  //     img: 'https://media.istockphoto.com/id/608516034/pl/zdj%C4%99cie/koncepcja-fitness-i-treningu-wellness.jpg?s=2048x2048&w=is&k=20&c=PkgLkngAYhfNTP6OpFG4tYSbsq8ne7zAJ6Bh4ECVDNg='
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'lorem ipsum',
-  //     desc: 'lorem ipsum',
-  //     img: 'https://media.istockphoto.com/id/608516034/pl/zdj%C4%99cie/koncepcja-fitness-i-treningu-wellness.jpg?s=2048x2048&w=is&k=20&c=PkgLkngAYhfNTP6OpFG4tYSbsq8ne7zAJ6Bh4ECVDNg='
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'lorem ipsum',
-  //     desc: 'lorem ipsum',
-  //     img: 'https://media.istockphoto.com/id/608516034/pl/zdj%C4%99cie/koncepcja-fitness-i-treningu-wellness.jpg?s=2048x2048&w=is&k=20&c=PkgLkngAYhfNTP6OpFG4tYSbsq8ne7zAJ6Bh4ECVDNg='
-  //   }
-  // ]
   return (
     <div className='menu'>
         <h1>Other post You may like</h1>
         {posts.map((post) => (
             <div className='post' key={post.id}>
-            <img src={post.img} alt='post'></img>
+            <img src={`../upload/${post?.img}`} alt='post'></img>
                 <h2>{post.title}</h2>
                 <button>Read more</button>
             </div>
